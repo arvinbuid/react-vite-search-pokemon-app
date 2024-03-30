@@ -26,14 +26,15 @@ function App() {
 
   const searchPokemon = () => {
     setLoading(true);
+    const lowercasePokemonName = pokemonName.toLowerCase();
     axios
-      .get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`, {
+      .get(`https://pokeapi.co/api/v2/pokemon/${lowercasePokemonName}`, {
         signal: controller.signal,
       })
       .then((response) => {
         setPokemon([
           {
-            name: pokemonName,
+            name: response.data.name,
             species: response.data.species.name,
             sprite: response.data.sprites.front_default,
             hp: response.data.stats[0].base_stat,
